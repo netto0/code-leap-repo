@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: .5rem;
+}
+
+.input {
+  background-color: #ffffff;
+  border: 1px solid #777777;
+  width: 100%;
+  height: 32px;
+
+  border-radius: 8px;
+}
+
+.input::placeholder {
+    color: #ccc;
+    text-indent: .5em;
+}
