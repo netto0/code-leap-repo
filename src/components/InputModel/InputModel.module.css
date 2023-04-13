@@ -24,3 +24,16 @@
     color: #ccc;
     text-indent: .5em;
 }
+
+.textarea {
+  background-color: #ffffff;
+  border: 1px solid #777777;
+  width: 100%;
+  border-radius: 8px;
+  resize: none;
+}
+
+.textarea::placeholder {
+  color: #ccc;
+  text-indent: .5em;
+}

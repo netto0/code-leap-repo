@@ -9,6 +9,10 @@
   line-height: 19px;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .button.blue {
   color: #ffffff;
   background-color: #7695ec;
@@ -26,6 +30,6 @@
 
 .button.white {
   color: #000;
-  border: 1px solid #000;
+  border: 1px solid #999;
   background-color: #fff;
 }

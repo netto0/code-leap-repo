@@ -1,0 +1,51 @@
+.container {
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    border-radius: 16px;
+}
+
+.titleArea {
+    display: flex;
+    justify-content: space-between;
+    background-color: #7695EC;
+    border-radius: 14px 14px 0 0;
+    padding: 1em;
+    color: #fff;
+}
+
+.title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.postInfos {
+    display: flex;
+    justify-content: space-between;
+    color: #777;
+    padding: 1em;
+}
+
+.contentArea {
+    padding: 1em;
+    padding-top: 0;
+    text-align: left;
+}
+
+.actionIcons {
+    display: flex;
+    gap: 2em;
+}
+
+.actionIcons svg {
+    font-size: 25px;
+    color: #fff;
+}
+
+.actionIcons svg:hover {
+    cursor: pointer;
+}
+
+.userName {
+    font-weight: bold;
+}
