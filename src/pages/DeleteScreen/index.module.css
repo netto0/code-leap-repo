@@ -1,9 +1,7 @@
 .container {
   box-sizing: border-box;
-  /* position: absolute; */
   width: 500px;
-  left: 250px;
-  top: 400px;
+  height: fit-content;
   background: #ffffff;
   border: 1px solid #cccccc;
   border-radius: 16px;
@@ -17,20 +15,14 @@
     justify-content: space-between;
 }
 
-.title {
-    display: flex;
-    font-weight: 700;
-    font-size: 22px;
-}
-
 .titleArea {
     margin-bottom: 1em;
 }
 
-.inputArea {
+.title {
     display: flex;
-    flex-direction: column;
-    gap: 2em;
+    font-weight: 700;
+    font-size: 22px;
 }
 
 .buttonField {

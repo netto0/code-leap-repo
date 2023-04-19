@@ -1,17 +1,16 @@
-import './App.css';
-import DeleteScreen from './pages/DeleteScreen/DeleteScreen';
-import EditScreen from './pages/EditScreen/EditScreen';
-import MainScreen from './pages/MainScreen/MainScreen';
-import SignUp from './pages/SignUp/SignUp';
-
+import { useEffect, useState } from "react";
+import "./App.css";
+import { getAllPosts } from "./actions/getPostsService";
+import MainScreen from "./pages/MainScreen";
+import SignUp from "./pages/SignUp";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const name = useSelector((state) => state.name.value);
+
   return (
     <div className="App">
-      <MainScreen />
-      {/* <SignUp/> */}
-      {/* <DeleteScreen/> */}
-      {/* <EditScreen/> */}
+      {name !== "" ? <MainScreen /> : <SignUp />}
     </div>
   );
 }

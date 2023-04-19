@@ -1,0 +1,17 @@
+.actionIcons {
+    display: flex;
+    gap: 2em;
+}
+
+.actionIcons svg {
+    font-size: 25px;
+    color: #fff;
+}
+
+.actionIcons svg:hover {
+    cursor: pointer;
+}
+
+.actionIcons svg:active {
+    filter: brightness(.8);
+}

@@ -26,26 +26,16 @@
     padding: 1em;
 }
 
+.userName {
+    font-weight: bold;
+    max-width: 40%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 .contentArea {
+    /* border: 2px solid red; */
     padding: 1em;
     padding-top: 0;
     text-align: left;
-}
-
-.actionIcons {
-    display: flex;
-    gap: 2em;
-}
-
-.actionIcons svg {
-    font-size: 25px;
-    color: #fff;
-}
-
-.actionIcons svg:hover {
-    cursor: pointer;
-}
-
-.userName {
-    font-weight: bold;
 }

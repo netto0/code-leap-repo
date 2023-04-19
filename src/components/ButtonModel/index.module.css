@@ -7,10 +7,19 @@
   font-size: 1rem;
   font-weight: 700;
   line-height: 19px;
+  transition: .3s;
 }
+
 
 .button:hover {
   cursor: pointer;
+  filter: brightness(1.1);
+  transition: .3s;
+}
+
+.button:active {
+  filter: brightness(.9);
+  transition: 0s;
 }
 
 .button.blue {
@@ -32,4 +41,17 @@
   color: #000;
   border: 1px solid #999;
   background-color: #fff;
+}
+
+.button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.button:disabled:active {
+  filter: brightness(1);
+}
+
+.button:disabled:hover {
+  filter: brightness(1);
 }

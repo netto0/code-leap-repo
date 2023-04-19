@@ -1,6 +1,6 @@
-import styles from "./InputModel.module.css";
+import styles from "./index.module.css";
 
-export default function InputModel({ label, placeholder, name, textarea }) {
+export default function InputModel({ label, placeholder, name, textarea, ...rest }) {
   return (
     <div className={styles.container}>
       <label className={styles.label}>{label}</label>
@@ -9,6 +9,7 @@ export default function InputModel({ label, placeholder, name, textarea }) {
           className={styles.input}
           name={name}
           placeholder={placeholder}
+          {...rest}
         />
       ) : (
         <textarea 
@@ -16,6 +17,7 @@ export default function InputModel({ label, placeholder, name, textarea }) {
           name={name}
           rows='4'
           placeholder={placeholder}
+          {...rest}
         />
       )}
     </div>
