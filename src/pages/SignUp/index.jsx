@@ -34,9 +34,9 @@ export default function SignUp() {
         </div>
         <div className={styles.buttonField}>
           <ButtonModel label="ENTER" color="blue" onClick={() => handleSubmit()}/>
-          {name}
+          {/* {name}
           -|-
-          {fieldName}
+          {fieldName} */}
         </div>
       </div>
     </div>

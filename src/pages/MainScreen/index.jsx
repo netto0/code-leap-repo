@@ -15,7 +15,7 @@ export default function MainScreen() {
   const modal = useSelector((state) => state.modal.value);
   const [posts, setPosts] = useState([]);
 
-  const getPostsTeste = async () => {
+  const getPosts = async () => {
     const response = await getAllPosts();
     if (response) {
       setPosts(response.results);
@@ -23,24 +23,24 @@ export default function MainScreen() {
   };
 
   useEffect(() => {
-    getPostsTeste();
+    getPosts();
   }, []);
 
   return (
     <>
-        <Modal isOpen={modal.modal} onClose={() => console.log("fechar")}>
-          {modal.modal === "delete" ? <DeleteScreen /> : <EditScreen />}
-        </Modal>
+      <Modal isOpen={modal} onClose={() => console.log("fechar")}>
+        {modal === "delete" ? <DeleteScreen /> : <EditScreen />}
+      </Modal>
 
       <div className={styles.externalContainer}>
         <div className={styles.internalContainer}>
           <div className={styles.titleArea}>
             <span className={styles.title}>CodeLeap NetWork</span>
-            modal:{modal.modal} id: {modal.id}
+            modal: {modal}
             <span className={styles.userName}>@{name}</span>
           </div>
           <div className={styles.contentArea}>
-            <WhatsYourMind getPosts={getPostsTeste} />
+            <WhatsYourMind getPosts={getPosts} />
 
             {posts.map((post) => (
               <PostContainer

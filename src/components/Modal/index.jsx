@@ -4,20 +4,20 @@ import { useEffect } from "react";
 
 const Modal = ({ isOpen, onClose, children }) => {
   
-  const disableScroll = () => {
-    document.body.style.overflow = "hidden";
-  };
+  // const disableScroll = () => {
+  //   document.body.style.overflow = "hidden";
+  // };
 
-  const enableScroll = () => {
-    document.body.style.overflow = "auto";
-  };
+  // const enableScroll = () => {
+  //   document.body.style.overflow = "auto";
+  // };
 
-  useEffect(() => {
-    disableScroll();
-    return () => {
-      enableScroll();
-    };
-  }, []);
+  // useEffect(() => {
+  //   disableScroll();
+  //   return () => {
+  //     enableScroll();
+  //   };
+  // }, []);
   
   if (!isOpen) {
     return null;
