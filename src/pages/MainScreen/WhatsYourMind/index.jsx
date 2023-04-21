@@ -19,10 +19,12 @@ export default function WhatsYourMind({ getPosts }) {
 
   const handleSubmit = async (name, title, content) => {
     const response = await createNewPost(name, title, content);
+    console.log("New Post")
     if (response) {
       getPosts();
       setInfos({ title: "", content: "" });
     }
+    console.log("End Post")
   };
 
   return (

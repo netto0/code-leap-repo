@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../components/Modal";
 import { getAllPosts } from "../../actions/getPostsService";
+import { IoMdExit } from "react-icons/io";
 
 import DeleteScreen from "../DeleteScreen";
 import EditScreen from "../EditScreen";
@@ -17,12 +18,18 @@ export default function MainScreen() {
   const modal = useSelector((state) => state.modal.value);
   const posts = useSelector((state) => state.allPosts.value);
   const postInfos = useSelector((state) => state.postInfos.value);
+  const loginName = localStorage.getItem("loginName");
 
   const getPosts = async () => {
     const response = await getAllPosts();
     if (response) {
       dispatch(setAllPosts(response.results));
     }
+  };
+
+  const logOut = () => {
+    localStorage.setItem("loginName", "");
+    document.location.reload();
   };
 
   useEffect(() => {
@@ -34,27 +41,29 @@ export default function MainScreen() {
       <Modal isOpen={modal} onClose={() => console.log("fechar")}>
         {modal === "delete" ? <DeleteScreen /> : <EditScreen />}
       </Modal>
-
-      <div className={styles.externalContainer}>
-        <div className={styles.internalContainer}>
-          <div className={styles.titleArea}>
-            <span className={styles.title}>CodeLeap NetWork</span>
-            <span className={styles.userName}>@{name}</span>
+      <div className={styles.container}>
+        <div className={styles.titleArea}>
+          <span className={styles.title}>CodeLeap NetWork</span>
+          <div className={styles.userOptions}>
+            <span className={styles.userName}>@{loginName}</span>
+            <span className={styles.exitIcon} onClick={logOut}>
+              <IoMdExit />
+            </span>
           </div>
-          <div className={styles.contentArea}>
-            <WhatsYourMind getPosts={getPosts} />
+        </div>
+        <div className={styles.contentArea}>
+          <WhatsYourMind getPosts={getPosts} />
 
-            {posts.map((post) => (
-              <PostContainer
-                userName={post.username}
-                postTitle={post.title}
-                postContent={post.content}
-                timeCreated={post.created_datetime}
-                key={post.id}
-                postID={post.id}
-              />
-            ))}
-          </div>
+          {posts.map((post) => (
+            <PostContainer
+              userName={post.username}
+              postTitle={post.title}
+              postContent={post.content}
+              timeCreated={post.created_datetime}
+              key={post.id}
+              postID={post.id}
+            />
+          ))}
         </div>
       </div>
     </>
