@@ -5,9 +5,7 @@ import { setModal } from "../../redux/features/modal/modalSlice";
 import { setPostInfos } from "../../redux/features/postInfos/postInfosSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllPosts } from "../../actions/getPostsService";
-
-export default function ActionButons({ postID }) {
+export default function ActionButons({ postID, postTitle, postContent }) {
   const postInfos = useSelector((state) => state.postInfos.value);
   const dispatch = useDispatch();
 
@@ -18,12 +16,12 @@ export default function ActionButons({ postID }) {
           dispatch(setModal("delete"));
           dispatch(setPostInfos({...postInfos, id: postID }));
         }}
-      >
+        >
         <FaTrashAlt />
       </span>
       <span onClick={() => {
-          dispatch(setModal("edit"));
-          dispatch(setPostInfos({...postInfos, id: postID }));
+        dispatch(setModal("edit"));
+        dispatch(setPostInfos({...postInfos, id: postID }));
         }}>
         <FaRegEdit />
       </span>

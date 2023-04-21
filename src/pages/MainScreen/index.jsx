@@ -2,23 +2,26 @@ import React from "react";
 import styles from "./index.module.css";
 import WhatsYourMind from "./WhatsYourMind";
 import PostContainer from "./PostContainer";
-import { getAllPosts } from "../../actions/getPostsService";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../components/Modal";
+import { getAllPosts } from "../../actions/getPostsService";
 
 import DeleteScreen from "../DeleteScreen";
 import EditScreen from "../EditScreen";
+import { setAllPosts } from "../../redux/features/allPosts/allPostsSlice";
 
 export default function MainScreen() {
+  const dispatch = useDispatch();
   const name = useSelector((state) => state.name.value);
   const modal = useSelector((state) => state.modal.value);
-  const [posts, setPosts] = useState([]);
+  const posts = useSelector((state) => state.allPosts.value);
+  const postInfos = useSelector((state) => state.postInfos.value);
 
   const getPosts = async () => {
     const response = await getAllPosts();
     if (response) {
-      setPosts(response.results);
+      dispatch(setAllPosts(response.results));
     }
   };
 
@@ -36,7 +39,6 @@ export default function MainScreen() {
         <div className={styles.internalContainer}>
           <div className={styles.titleArea}>
             <span className={styles.title}>CodeLeap NetWork</span>
-            modal: {modal}
             <span className={styles.userName}>@{name}</span>
           </div>
           <div className={styles.contentArea}>

@@ -1,6 +1,17 @@
 import styles from "./index.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setPostInfos } from "../../redux/features/postInfos/postInfosSlice";
 
-export default function InputModel({ label, placeholder, name, textarea, ...rest }) {
+export default function InputModel({
+  label,
+  placeholder,
+  name,
+  textarea,
+  ...rest
+}) {
+  const postInfos = useSelector((state) => state.postInfos.value);
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.container}>
       <label className={styles.label}>{label}</label>
@@ -12,10 +23,10 @@ export default function InputModel({ label, placeholder, name, textarea, ...rest
           {...rest}
         />
       ) : (
-        <textarea 
+        <textarea
           className={styles.textarea}
           name={name}
-          rows='4'
+          rows="4"
           placeholder={placeholder}
           {...rest}
         />

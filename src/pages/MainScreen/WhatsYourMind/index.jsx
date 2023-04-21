@@ -39,9 +39,6 @@ export default function WhatsYourMind({ getPosts }) {
             onChange={(e) => setInfos({ ...infos, title: e.target.value })}
             value={infos.title}
           />
-          {/* {infos.title}
-          --|--
-          {newPostInfos.title} */}
           <InputModel
             label="Content"
             name="content"
@@ -50,9 +47,6 @@ export default function WhatsYourMind({ getPosts }) {
             onChange={(e) => setInfos({ ...infos, content: e.target.value })}
             value={infos.content}
           />
-          {/* {infos.content}
-          --|--
-          {newPostInfos.content} */}
         </div>
         <div className={styles.buttonField}>
           <ButtonModel

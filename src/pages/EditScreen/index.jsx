@@ -6,15 +6,19 @@ import { setModal } from "../../redux/features/modal/modalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { editPost } from "../../actions/editPostService";
 import { setPostInfos } from "../../redux/features/postInfos/postInfosSlice";
+import { getAllPosts } from "../../actions/getPostsService";
+import { setAllPosts } from "../../redux/features/allPosts/allPostsSlice";
 
 export default function EditScreen() {
-  const postInfos = useSelector((state) => state.modal.value.id);
+  const postInfos = useSelector((state) => state.postInfos.value);
   const dispatch = useDispatch();
 
-  const changePost = async (id, title, content) => {
-    const response = await editPost(id, title, content);
+  const handleSubmit = async () => {
+    dispatch(setModal(""));
+    await editPost(postInfos.id, postInfos.title, postInfos.content);
+    const response = await getAllPosts();
     if (response) {
-      console.log("foi");
+      dispatch(setAllPosts(response.results));
     }
   };
 
@@ -25,12 +29,13 @@ export default function EditScreen() {
           <span className={styles.title}>Edit item</span>
         </div>
         <div className={styles.inputArea}>
-          <InputModel label="Title" name="title" placeholder="Hello world" />
+          <InputModel label="Title" name="title" placeholder="Hello world" onChange={(e) => dispatch(setPostInfos({...postInfos, title: e.target.value }))}/>
           <InputModel
             label="Content"
             name="content"
             placeholder="Content here"
             textarea={true}
+            onChange={(e) => dispatch(setPostInfos({...postInfos, content: e.target.value }))}
           />
         </div>
         <div className={styles.buttonField}>
@@ -39,18 +44,13 @@ export default function EditScreen() {
             color="white"
             onClick={() => {
               dispatch(setModal(""));
-              dispatch(setPostInfos({...postInfos, id:""}));
+              dispatch(setPostInfos({...postInfos, id:"", title:"", content:""}));
             }}
           />
           <ButtonModel
             label="Save"
             color="green"
-            onClick={() =>
-              {
-                editPost(postInfos.id,)
-                dispatch(setModal(""))
-              }
-            }
+            onClick={handleSubmit}
           />
         </div>
       </div>

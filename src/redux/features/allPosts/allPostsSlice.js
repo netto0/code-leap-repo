@@ -1,22 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPosts } from "../../../actions/getPostsService";
 
-const getPosts = async () => {
-    const response = await getAllPosts();
-    if (response) {
-      return(response.results)
-    }
-  };
-
-
 export const allPostsSlice = createSlice({
-    name: 'allPost',
+    name: 'allPosts',
     initialState: {
       value: []
     },
     reducers: {
-      setAllPosts: (state) => {
-        state.value = getPosts()
+      setAllPosts: (state, action) => {
+        state.value = action.payload
       },
     },
   })

@@ -25,7 +25,7 @@ export default function PostContainer({
         <span className={styles.title}>{postTitle}</span>
         
         {userName === name ? (
-          <ActionButons postID={postID}/>
+          <ActionButons postID={postID} postTitle={postTitle} postContent={postContent}/>
         ) : undefined}
       </div>
       <div className={styles.postInfos}>

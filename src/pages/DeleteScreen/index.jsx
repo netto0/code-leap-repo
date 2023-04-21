@@ -6,11 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "../../actions/deletePostService";
 import { setPostInfos } from "../../redux/features/postInfos/postInfosSlice";
 import { getAllPosts } from "../../actions/getPostsService";
+import { setAllPosts } from "../../redux/features/allPosts/allPostsSlice";
 
 export default function DeleteScreen() {
 
   const postInfos = useSelector((state) => state.postInfos.value)
   const dispatch = useDispatch()
+  
+  const handleSubmit = async () => {
+    dispatch(setModal(""))
+    await deletePost(postInfos.id)
+    const response = await getAllPosts();
+    if (response) {
+      dispatch(setAllPosts(response.results))
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -19,18 +29,14 @@ export default function DeleteScreen() {
           <span className={styles.title} >
             Are you sure you want to delete this item?
             <br />
-            {/* ID: {postInfos.id} */}
           </span>
         </div>
         <div className={styles.buttonField}>
           <ButtonModel label="Cancel" color="white" onClick={() => {
             dispatch(setModal(""))
-            dispatch(setPostInfos({...postInfos, id:""}))
+            dispatch(setPostInfos({...postInfos, id:"", title:"", content:""}))
           }}/>
-          <ButtonModel label="Delete" color="red" onClick={() => {
-            deletePost(postInfos.id)
-            dispatch(setModal(""))
-          }}/>
+          <ButtonModel label="Delete" color="red" onClick={handleSubmit}/>
         </div>
       </div>
     </div>
