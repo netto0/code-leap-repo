@@ -2,8 +2,8 @@
   box-sizing: border-box;
   width: 500px;
   height: fit-content;
-  background: #ffffff;
-  border: 1px solid #cccccc;
+  background: var(--bgWhite);
+  border: var(--containerBorder);
   border-radius: 16px;
   padding: 1.2em;
 }

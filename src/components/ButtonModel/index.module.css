@@ -23,28 +23,28 @@
 }
 
 .button.blue {
-  color: #ffffff;
-  background-color: #7695ec;
+  color: var(--bgWhite);
+  background-color: var(--babyBlue);
 }
 
 .button.red {
-  color: #ffffff;
-  background-color: #ff5151;
+  color: var(--bgWhite);
+  background-color: var(--redButton);
 }
 
 .button.green {
-  color: #ffffff;
-  background-color: #47b960;
+  color: var(--bgWhite);
+  background-color: var(--greenButton);
 }
 
 .button.white {
   color: #000;
   border: 1px solid #999;
-  background-color: #fff;
+  background-color: var(--bgWhite);
 }
 
 .button:disabled {
-  background-color: #999;
+  background-color: var(--lightGray);
   cursor: not-allowed;
 }
 

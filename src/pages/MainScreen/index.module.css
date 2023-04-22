@@ -1,18 +1,26 @@
 .container {
     grid-template-rows: 60px 1fr;
     min-height: 100vh;
+    min-width: 800px;
     height: fit-content;
-    background-color: #fff;
+    background-color: var(--bgWhite);
     width: 60%;
 }
 
+@media (max-width: 820px) {
+    .container {
+        min-width: 100%;
+    }
+}
+
+
 .titleArea {
     display: flex;
-    background-color: #7695ec;
+    background-color: var(--babyBlue);
     padding: 1em 2em;
     height: auto;
     justify-content: space-between;
-    color: #fff;
+    color: var(--bgWhite);
     align-items: baseline;
 }
 

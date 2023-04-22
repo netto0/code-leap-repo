@@ -5,7 +5,7 @@
 
 .actionIcons svg {
     font-size: 25px;
-    color: #fff;
+    color: var(--bgWhite);
 }
 
 .actionIcons svg:hover {

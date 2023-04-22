@@ -3,10 +3,10 @@
   width: 500px;
   left: 250px;
   top: 400px;
-  background: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 16px;
   padding: 1.2em;
+  background: var(--bgWhite);
+  border: var(--containerBorder);
+  border-radius: var(--borderRadius);
 }
 
 .content {

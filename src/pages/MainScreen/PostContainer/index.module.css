@@ -1,16 +1,16 @@
 .container {
-    background-color: #FFFFFF;
-    border: 1px solid #999999;
-    border-radius: 16px;
+    background-color: var(--bgWhite);
+    border: var(--containerBorder);
+    border-radius: var(--borderRadius);
 }
 
 .titleArea {
     display: flex;
     justify-content: space-between;
     background-color: #7695EC;
-    border-radius: 14px 14px 0 0;
+    border-radius: 13px 13px 0 0;
     padding: 1em;
-    color: #fff;
+    color: var(--bgWhite);
 }
 
 .title {
@@ -25,8 +25,8 @@
 .postInfos {
     display: flex;
     justify-content: space-between;
-    color: #777;
     padding: 1em;
+    color: var(--darkGray);
 }
 
 .userName {
@@ -37,7 +37,6 @@
     overflow: hidden;
 }
 .contentArea {
-    /* border: 2px solid red; */
     padding: 1em;
     padding-top: 0;
     text-align: left;

@@ -16,3 +16,16 @@ textarea {
 html {
   background-color: #ddd;
 }
+
+:root {
+  --babyBlue: #7695ec;
+  --bgWhite: #fff;
+  --containerBorder: 1px solid #cccccc;
+  --inputBorder: 1px solid #777777;
+  --borderRadius: 16px;
+  --lightGray: #CCC;
+  --darkGray: #777;
+  --textIndent: .5em;
+  --redButton: #ff5151;
+  --greenButton: #47b960;
+}

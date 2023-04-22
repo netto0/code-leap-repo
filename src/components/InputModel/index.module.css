@@ -12,8 +12,8 @@
 }
 
 .input {
-  background-color: #ffffff;
-  border: 1px solid #777777;
+  background-color: var(--bgWhite);
+  border: var(--inputBorder);
   width: 100%;
   height: 32px;
 
@@ -21,19 +21,19 @@
 }
 
 .input::placeholder {
-    color: #ccc;
-    text-indent: .5em;
+    color: var(--lightGray);
+    text-indent: var(--textIndent);
 }
 
 .textarea {
-  background-color: #ffffff;
-  border: 1px solid #777777;
+  background-color: var(--bgWhite);
+  border: var(--inputBorder);
   width: 100%;
   border-radius: 8px;
   resize: none;
 }
 
 .textarea::placeholder {
-  color: #ccc;
-  text-indent: .5em;
+  color: var(--lightGray);
+  text-indent: var(--textIndent);
 }
