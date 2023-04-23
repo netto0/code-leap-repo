@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styles from "./index.module.css";
 import WhatsYourMind from "./WhatsYourMind";
 import PostContainer from "./PostContainer";
@@ -20,21 +20,47 @@ export default function MainScreen() {
   const postInfos = useSelector((state) => state.postInfos.value);
   const loginName = localStorage.getItem("loginName");
 
+  const [data, setData] = useState("");
+
   const getPosts = async () => {
     const response = await getAllPosts();
     if (response) {
+      setData(response.next);
       dispatch(setAllPosts(response.results));
     }
   };
-
-  const logOut = () => {
-    localStorage.setItem("loginName", "");
-    document.location.reload();
-  };
-
+  // ===================================
+  
   useEffect(() => {
-    getPosts();
+    paginatedRequest();
+    // console.log(data)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+      )
+      return;
+      paginatedRequest();
+    };
+    
+    // ===================================
+    const logOut = () => {
+      localStorage.setItem("loginName", "");
+      document.location.reload();
+    };
+    
+    const paginatedRequest = useCallback(async () => {
+      const response = await getAllPosts(data);
+      console.log(response.next)
+    if (response) {
+      setData(response.next);
+      dispatch(setAllPosts(posts.concat(response.results)));
+    }
+  },[])
 
   return (
     <>
@@ -53,14 +79,23 @@ export default function MainScreen() {
         </div>
         <div className={styles.contentArea}>
           <WhatsYourMind getPosts={getPosts} />
+          {data?.previous && (
+            <button onClick={() => paginatedRequest(data.previous)}>
+              Previous
+            </button>
+          )}
 
-          {posts.map((post) => (
+          {data && (
+            <button onClick={() => paginatedRequest(data.next)}>Next</button>
+          )}
+          {data && JSON.stringify(data)}
+          {posts.map((post, index) => (
             <PostContainer
               userName={post.username}
               postTitle={post.title}
               postContent={post.content}
               timeCreated={post.created_datetime}
-              key={post.id}
+              key={index}
               postID={post.id}
             />
           ))}
