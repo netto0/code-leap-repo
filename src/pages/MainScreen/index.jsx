@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styles from "./index.module.css";
 import WhatsYourMind from "./WhatsYourMind";
 import PostContainer from "./PostContainer";
@@ -14,53 +14,52 @@ import { setAllPosts } from "../../redux/features/allPosts/allPostsSlice";
 
 export default function MainScreen() {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.name.value);
   const modal = useSelector((state) => state.modal.value);
   const posts = useSelector((state) => state.allPosts.value);
-  const postInfos = useSelector((state) => state.postInfos.value);
   const loginName = localStorage.getItem("loginName");
-
-  const [data, setData] = useState("");
+  const [responseData, setResponseData] = useState();
 
   const getPosts = async () => {
     const response = await getAllPosts();
     if (response) {
-      setData(response.next);
       dispatch(setAllPosts(response.results));
+      setResponseData(response);
     }
   };
-  // ===================================
-  
-  useEffect(() => {
-    paginatedRequest();
-    // console.log(data)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const handleScroll = () => {
+  useEffect(() => {
+    getPosts()
+  }, [])
+
+  const infiniteScroll = async (url) => {
+    if (url) {
+      const response = await getAllPosts(url);
+      if (response) {
+        dispatch(setAllPosts([...posts, ...response.results]));
+        setResponseData(response)
+        return;
+      }
+    }
+  }
+
+  const handleScroll = async () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
       document.documentElement.offsetHeight
-      )
+    )
       return;
-      paginatedRequest();
-    };
-    
-    // ===================================
-    const logOut = () => {
-      localStorage.setItem("loginName", "");
-      document.location.reload();
-    };
-    
-    const paginatedRequest = useCallback(async () => {
-      const response = await getAllPosts(data);
-      console.log(response.next)
-    if (response) {
-      setData(response.next);
-      dispatch(setAllPosts(posts.concat(response.results)));
-    }
-  },[])
+    infiniteScroll(responseData?.next);
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [responseData]);
+
+  const logOut = () => {
+    localStorage.setItem("loginName", "");
+    document.location.reload();
+  };
 
   return (
     <>
@@ -79,16 +78,6 @@ export default function MainScreen() {
         </div>
         <div className={styles.contentArea}>
           <WhatsYourMind getPosts={getPosts} />
-          {data?.previous && (
-            <button onClick={() => paginatedRequest(data.previous)}>
-              Previous
-            </button>
-          )}
-
-          {data && (
-            <button onClick={() => paginatedRequest(data.next)}>Next</button>
-          )}
-          {data && JSON.stringify(data)}
           {posts.map((post, index) => (
             <PostContainer
               userName={post.username}

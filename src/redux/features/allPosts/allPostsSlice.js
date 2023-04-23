@@ -8,6 +8,7 @@ export const allPostsSlice = createSlice({
     },
     reducers: {
       setAllPosts: (state, action) => {
+        // console.log(action.payload, "payload")
         state.value = action.payload
       },
     },
