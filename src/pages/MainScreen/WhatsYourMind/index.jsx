@@ -17,14 +17,15 @@ export default function WhatsYourMind({ getPosts }) {
   const [infos, setInfos] = useState({ title: "", content: "" });
   const infosFilled = infos.title !== "" && infos.content !== "";
 
-  const handleSubmit = async (name, title, content) => {
+  const handleSubmit = async (e, name, title, content) => {
+    e.preventDefault()
     const response = await createNewPost(name, title, content);
-    console.log("New Post")
+    console.log("New Post");
     if (response) {
       getPosts();
       setInfos({ title: "", content: "" });
     }
-    console.log("End Post")
+    console.log("End Post");
   };
 
   return (
@@ -33,31 +34,34 @@ export default function WhatsYourMind({ getPosts }) {
         <div className={styles.titleArea}>
           <span className={styles.title}>What's on your mind?</span>
         </div>
-        <div className={styles.inputArea}>
-          <InputModel
-            label="Title"
-            name="title"
-            placeholder="Hello world"
-            onChange={(e) => setInfos({ ...infos, title: e.target.value })}
-            value={infos.title}
-          />
-          <InputModel
-            label="Content"
-            name="content"
-            placeholder="Content here"
-            textarea={true}
-            onChange={(e) => setInfos({ ...infos, content: e.target.value })}
-            value={infos.content}
-          />
-        </div>
-        <div className={styles.buttonField}>
-          <ButtonModel
-            label="Create"
-            disabled={infosFilled ? false : true}
-            color="blue"
-            onClick={() => handleSubmit(name, infos.title, infos.content)}
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.inputArea}>
+            <InputModel
+              label="Title"
+              name="title"
+              placeholder="Hello world"
+              onChange={(e) => setInfos({ ...infos, title: e.target.value })}
+              value={infos.title}
+            />
+            <InputModel
+              label="Content"
+              name="content"
+              placeholder="Content here"
+              textarea={true}
+              onChange={(e) => setInfos({ ...infos, content: e.target.value })}
+              value={infos.content}
+            />
+          </div>
+          <div className={styles.buttonField}>
+            <ButtonModel
+              label="Create"
+              disabled={infosFilled ? false : true}
+              color="blue"
+              type="submit"
+              onClick={(e) => handleSubmit(e, name, infos.title, infos.content)}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );
